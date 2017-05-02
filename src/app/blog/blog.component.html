@@ -1,3 +1,8 @@
-<p>
-  blog works!
-</p>
+<div class="blog-content" *ngFor="let blog of blogs;let currentIndex = index">
+  <div class="blog-title">
+    {{blog.title}}
+  </div>
+  <div class="blog-description">
+    {{blog.description}}
+  </div>
+</div>
