@@ -1,8 +1,6 @@
-<div class="blog-content" *ngFor="let blog of blogs;let currentIndex = index">
-  <div class="blog-title">
-    {{blog.title}}
-  </div>
-  <div class="blog-description">
-    {{blog.description}}
-  </div>
-</div>
+<nav>
+  <button routerLink="/login">Sign In</button >
+  <button routerLink="/blog-form">Add Blog</button >
+  <button routerLink="/blog/1">View Blog</button >
+</nav>
+<router-outlet></router-outlet>

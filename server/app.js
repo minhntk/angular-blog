@@ -6,6 +6,7 @@ var BlogRoutes = require('./routes/BlogRoutes.js');
 var blogRoutes = new BlogRoutes();
 app.use(blogRoutes.routes);
 app.use('/', express.static(path.join(__dirname, '../dist/')));
+app.use('*', express.static(path.join(__dirname, '../dist/')));
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')))
 
 app.listen(3000, function () {

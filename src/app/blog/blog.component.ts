@@ -11,12 +11,16 @@ import { Blog }               from './shared/blog';
 export class BlogComponent implements OnInit {
 
   private _blogs : Blog[] = [];
+  private _blog: Blog;
 
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {
     this._blogs = this.getBlogs();
+    this.blogService.getBlog().then((blog) => {
+      this._blog = blog;
+    });
   }
 
   get blogs(){
