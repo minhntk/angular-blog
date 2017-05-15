@@ -12,12 +12,26 @@ import {EditorModule,SharedModule} from 'primeng/primeng';
 import { BlogFormComponent } from './blog/blog-form/blog-form.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard }                from './shared/auth-guard.service';
+import { AuthService }                from './shared/auth.service';
+import { ChatComponent } from './chat/chat.component';
 
 const appRoutes: Routes = [
-  { path: '', component: BlogFormComponent },
-  { path: 'login', component: LoginComponent },
+  { 
+    path: '', 
+    canActivate: [AuthGuard],
+    component: BlogFormComponent 
+  },
+  { 
+    path: 'login',
+    component: LoginComponent
+   },
   { path: 'blog/:id', component: BlogDetailComponent },
-  { path: 'blog-form', component: BlogFormComponent },
+  { 
+    path: 'blog-form', 
+    canActivate: [AuthGuard],
+    component: BlogFormComponent 
+  },
 ];
 
 @NgModule({
@@ -28,7 +42,8 @@ const appRoutes: Routes = [
     BlogDetailComponent,
     BlogFormComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +54,7 @@ const appRoutes: Routes = [
     SharedModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
