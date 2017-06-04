@@ -4,17 +4,22 @@ var app = require('express')();
 var http = require('http').Server(app);
 var path = require('path');
 var io = require('socket.io')(http);
+var authService = require("./services/AuthService.js")(); 
 var BlogRoutes = require('./routes/BlogRoutes.js');
-var AuthenticationRoutes = require('./routes/AuthenticationRoutes.js');
+var AuthRoutes = require('./routes/AuthRoutes.js');
 
 var blogRoutes = new BlogRoutes();
-var authenticationRoutes = new AuthenticationRoutes();
+var authRoutes = new AuthRoutes();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/x-www-form-urlencoded
+// for easier testing with Postman or plain HTML forms
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(authService.initialize());
 
+app.use(authRoutes.routes);
 app.use(blogRoutes.routes);
-app.use(authenticationRoutes.routes);
+
 
 io.of('/api/chat').on('connection', function(socket){
   console.log('a user connected');
@@ -24,6 +29,8 @@ io.of('/api/chat').on('connection', function(socket){
     io.of('/api/chat').emit('message', {type:'new-message', text: message});    
   });
 });
+
+
 
 app.use('/', express.static(path.join(__dirname, '../dist/')));
 app.use('*', express.static(path.join(__dirname, '../dist/')));
