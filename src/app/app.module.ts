@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard }                from './shared/auth-guard.service';
 import { AuthService }                from './shared/auth.service';
 import { ChatComponent } from './chat/chat.component';
+import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes: Routes = [
   { 
@@ -22,16 +23,12 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     component: BlogFormComponent 
   },
-  { 
-    path: 'login',
-    component: LoginComponent
-   },
   { path: 'blog/:id', component: BlogDetailComponent },
   { 
     path: 'blog-form', 
     canActivate: [AuthGuard],
     component: BlogFormComponent 
-  },
+  }
 ];
 
 @NgModule({
@@ -52,6 +49,7 @@ const appRoutes: Routes = [
     HttpModule,
     EditorModule,
     SharedModule,
+    AppRoutingModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthGuard, AuthService],

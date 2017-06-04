@@ -11,7 +11,7 @@ module.exports = class AuthRoutes {
         this.routes = router.post('/api/auth/login', (req, res, next)=>{
             this.login(req, res, next);
         });
-        this.routes = router.get('/api/auth/authenticate', passport.authenticate('jwt', { session: false }), function(req, res) {  
+        this.routes = router.get('/api/*', passport.authenticate('jwt', { session: false }), function(req, res) {  
             res.send('It worked! User id is: ' + req.user.email + '.');
         });
 

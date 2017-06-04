@@ -1,14 +1,14 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidat>
   <div>
     <div class="login-form username">
-      <span>UserName: </span>
-      <span><input type="text" [(ngModel)]="username" formControlName="username" /></span>
+      <span>Email: </span>
+      <span><input type="text" [(ngModel)]="username" formControlName="email" /></span>
     </div>
     <div class="login-form username">
       <span>Password: </span>
       <span><input type="text" [(ngModel)]="password" formControlName="password" /></span>
     </div>
-    <button type="submit"
-            [disabled]="loginForm.pristine" class="btn btn-success">Sign In</button>
+    <button type="submit" class="btn btn-success">Sign In</button>
   </div>
 </form>
+
